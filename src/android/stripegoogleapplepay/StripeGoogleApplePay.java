@@ -74,6 +74,8 @@ public class StripeGoogleApplePay extends CordovaPlugin {
 
   @Override
   public void onActivityResult(int requestCode, int resultCode, Intent data) {
+    this.callback.error("fail");
+    return;
     switch (requestCode) {
       case LOAD_PAYMENT_DATA_REQUEST_CODE:
         switch (resultCode) {
