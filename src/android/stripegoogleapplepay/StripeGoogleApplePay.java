@@ -74,17 +74,15 @@ public class StripeGoogleApplePay extends CordovaPlugin {
 
   @Override
   public void onActivityResult(int requestCode, int resultCode, Intent data) {
-    this.callback.error("fail");
-    return;
-    /*switch (requestCode) {
+    switch (requestCode) {
       case LOAD_PAYMENT_DATA_REQUEST_CODE:
         switch (resultCode) {
           case Activity.RESULT_OK:
             PaymentData paymentData = PaymentData.getFromIntent(data);
             // You can get some data on the user's card, such as the brand and last 4 digits
-            //CardInfo info = paymentData.getCardInfo();
+            CardInfo info = paymentData.getCardInfo();
             // You can also pull the user address from the PaymentData object.
-            //UserAddress address = paymentData.getShippingAddress();
+            UserAddress address = paymentData.getShippingAddress();
             // This is the raw JSON string version of your Stripe token.
             String rawToken = paymentData.getPaymentMethodToken().getToken();
 
@@ -107,16 +105,14 @@ public class StripeGoogleApplePay extends CordovaPlugin {
             // Log the status for debugging
             // Generally there is no need to show an error to
             // the user as the Google Payment API will do that
-            this.callback.error("Result error");
             break;
           default:
-          this.callback.error("Other error");
             // Do nothing.
         }
         break; // Breaks the case LOAD_PAYMENT_DATA_REQUEST_CODE
       // Handle any other startActivityForResult calls you may have made.
       default:
-        // Do nothing.*/
+        // Do nothing.
     }
   }
 
