@@ -74,6 +74,7 @@ public class StripeGoogleApplePay extends CordovaPlugin {
 
   @Override
   public void onActivityResult(int requestCode, int resultCode, Intent data) {
+
     switch (requestCode) {
       case LOAD_PAYMENT_DATA_REQUEST_CODE:
         switch (resultCode) {
@@ -179,7 +180,7 @@ public class StripeGoogleApplePay extends CordovaPlugin {
         .setPaymentMethodTokenizationType(WalletConstants.PAYMENT_METHOD_TOKENIZATION_TYPE_PAYMENT_GATEWAY)
         .addParameter("gateway", "stripe")
         .addParameter("stripe:publishableKey", this.stripePublishableKey)
-        .addParameter("stripe:version", "5.1.0")
+        .addParameter("stripe:version", "2018-11-08")
         .build();
   }
 
