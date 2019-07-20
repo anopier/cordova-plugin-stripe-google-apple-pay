@@ -10,8 +10,8 @@
     <license>MIT</license>
     <keywords>cordova,stripe,google,apple,pay</keywords>
     <author>Jack Burgess</author>
-    <repo>https://github.com/jack828/cordova-plugin-stripe-google-apple-pay.git</repo>
-    <issue>https://github.com/jack828/cordova-plugin-stripe-google-apple-pay/issues</issue>
+    <repo>https://github.com/anopier/cordova-plugin-stripe-google-apple-pay.git</repo>
+    <issue>https://github.com/anopier/cordova-plugin-stripe-google-apple-pay/issues</issue>
     <js-module src="www/stripe-google-apple-pay.js" name="sgap">
         <clobbers target="sgap" />
     </js-module>
@@ -30,8 +30,8 @@
             </feature>
         </config-file>
         <source-file src="src/android/stripegoogleapplepay/StripeGoogleApplePay.java" target-dir="src/android/stripegoogleapplepay" />
-        <framework src="com.stripe:stripe-android:6.1.2" />
-        <framework src="com.google.android.gms:play-services-wallet:15.0.1" />
+        <framework src="com.stripe:stripe-android:9.3.8" />
+        <framework src="com.google.android.gms:play-services-wallet:11.4.2" />
         <framework src="com.android.support:support-v4:27.0.2" />
         <framework src="com.android.support:appcompat-v7:26.0.1" />
     </platform>
