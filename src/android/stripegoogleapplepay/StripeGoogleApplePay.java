@@ -162,7 +162,7 @@ public class StripeGoogleApplePay extends CordovaPlugin {
                                       WalletConstants.CARD_NETWORK_VISA,
                                       WalletConstants.CARD_NETWORK_MASTERCARD))
                               .build())
-              .setPaymentMethodTokenizationParameters(createTokenizationParameters())
+              .setPaymentMethodTokenizationParameters(createTokenisationParameters())
               .build();
   }
 }
