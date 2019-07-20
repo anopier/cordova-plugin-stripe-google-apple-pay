@@ -74,7 +74,7 @@ public class StripeGoogleApplePay extends CordovaPlugin {
 
   @Override
   public void onActivityResult(int requestCode, int resultCode, Intent data) {
-    this.callback.error("Payment cancelled");
+    this.callback.error("Payment cancelled - haha");
   }
 
   private boolean isInitialised() {
@@ -126,40 +126,43 @@ public class StripeGoogleApplePay extends CordovaPlugin {
   private void requestPayment (String totalPrice, String currency) {
     PaymentDataRequest request = this.createPaymentDataRequest(totalPrice, currency);
     Activity activity = this.cordova.getActivity();
-    this.callback.error("Payment cancelled");
-
+    
+    if (request != null) {
+      cordova.setActivityResultCallback(this);
+      AutoResolveHelper.resolveTask(
+          this.paymentsClient.loadPaymentData(request),
+          activity,
+          LOAD_PAYMENT_DATA_REQUEST_CODE);
+    }
   }
 
   private PaymentMethodTokenizationParameters createTokenisationParameters() {
-    return PaymentMethodTokenizationParameters.newBuilder()
-        .setPaymentMethodTokenizationType(WalletConstants.PAYMENT_METHOD_TOKENIZATION_TYPE_PAYMENT_GATEWAY)
-        .addParameter("gateway", "stripe")
-        .addParameter("stripe:publishableKey", this.stripePublishableKey)
-        .addParameter("stripe:version", "5.1.0")
-        .build();
+      return PaymentMethodTokenizationParameters.newBuilder()
+      .setPaymentMethodTokenizationType(
+              WalletConstants.PAYMENT_METHOD_TOKENIZATION_TYPE_PAYMENT_GATEWAY)
+      .addParameter("gateway", "stripe")
+      .addParameter("stripe:publishableKey", this.stripePublishableKey)
+      .addParameter("stripe:version", "2018-11-08")
+      .build();
   }
 
   private PaymentDataRequest createPaymentDataRequest(String totalPrice, String currency) {
-    PaymentDataRequest.Builder request =
-        PaymentDataRequest.newBuilder()
-            .setTransactionInfo(
-                TransactionInfo.newBuilder()
-                    .setTotalPriceStatus(WalletConstants.TOTAL_PRICE_STATUS_FINAL)
-                    .setTotalPrice(totalPrice)
-                    .setCurrencyCode(currency)
-                    .build())
-            .addAllowedPaymentMethod(WalletConstants.PAYMENT_METHOD_CARD)
-            .addAllowedPaymentMethod(WalletConstants.PAYMENT_METHOD_TOKENIZED_CARD)
-            .setCardRequirements(
-                CardRequirements.newBuilder()
-                    .addAllowedCardNetworks(Arrays.asList(
-                        WalletConstants.CARD_NETWORK_AMEX,
-                        WalletConstants.CARD_NETWORK_DISCOVER,
-                        WalletConstants.CARD_NETWORK_VISA,
-                        WalletConstants.CARD_NETWORK_MASTERCARD))
-                    .build());
-
-    request.setPaymentMethodTokenizationParameters(this.createTokenisationParameters());
-    return request.build();
+      return PaymentDataRequest.newBuilder()
+              .setTransactionInfo(
+                      TransactionInfo.newBuilder()
+                              .setTotalPriceStatus(WalletConstants.TOTAL_PRICE_STATUS_FINAL)
+                              .setTotalPrice(totalPrice)
+                              .setCurrencyCode(currency)
+                              .build())
+              .addAllowedPaymentMethod(WalletConstants.PAYMENT_METHOD_CARD)
+              .addAllowedPaymentMethod(WalletConstants.PAYMENT_METHOD_TOKENIZED_CARD)
+              .setCardRequirements(
+                      CardRequirements.newBuilder()
+                              .addAllowedCardNetworks(Arrays.asList(
+                                      WalletConstants.CARD_NETWORK_VISA,
+                                      WalletConstants.CARD_NETWORK_MASTERCARD))
+                              .build())
+              .setPaymentMethodTokenizationParameters(createTokenizationParameters())
+              .build();
   }
 }
