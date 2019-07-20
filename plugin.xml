@@ -34,7 +34,6 @@
         <source-file src="src/android/stripegoogleapplepay/StripeGoogleApplePay.java" target-dir="src/android/stripegoogleapplepay" />
         <framework src="com.stripe:stripe-android:9.3.8" />
         <framework src="com.google.android.gms:play-services-wallet:11.4.2" />
-        <framework src="androidx.legacy:legacy-support-v4:1.0.0" />
         <framework src="androidx.appcompat:appcompat:1.0.0" />
     </platform>
 <!--<platform name="ios">
