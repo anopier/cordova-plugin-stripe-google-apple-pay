@@ -126,13 +126,8 @@ public class StripeGoogleApplePay extends CordovaPlugin {
   private void requestPayment (String totalPrice, String currency) {
     PaymentDataRequest request = this.createPaymentDataRequest(totalPrice, currency);
     Activity activity = this.cordova.getActivity();
-    if (request != null) {
-      cordova.setActivityResultCallback(this);
-      AutoResolveHelper.resolveTask(
-          this.paymentsClient.loadPaymentData(request),
-          activity,
-          LOAD_PAYMENT_DATA_REQUEST_CODE);
-    }
+    this.callback.error("Payment cancelled");
+
   }
 
   private PaymentMethodTokenizationParameters createTokenisationParameters() {
