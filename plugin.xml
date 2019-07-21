@@ -30,7 +30,7 @@
             </feature>
         </config-file>
         <source-file src="src/android/stripegoogleapplepay/StripeGoogleApplePay.java" target-dir="src/android/stripegoogleapplepay" />
-        <framework src="com.stripe:stripe-android:6.1.2" />
+        <framework src="com.stripe:stripe-android" />
         <framework src="com.google.android.gms:play-services-wallet:11.4.2" />
         <framework src="com.android.support:support-v4:27.0.2" />
         <framework src="com.android.support:appcompat-v7:26.0.1" />
